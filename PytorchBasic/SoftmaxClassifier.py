@@ -116,7 +116,8 @@ def test():
             images, labels = data
             outputs = model(images)
             # outputs为(N * 10),我们从第一维看，输出每一个的最大值
-            _, predicted  = torch.max(outputs.data, dim=1 )
+            # 返回的是最大值和最大值的索引，我们只需要索引，不需要值，值保存在_中
+            _, predicted  = torch.max(outputs.data, dim=1)
             # 去labels的第0个元素，即N，因为labels是(N * 10)
             total += labels.size(0)
             # 因为labels和predicted都是张量，因此用item
